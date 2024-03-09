@@ -28,7 +28,7 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/nodedocxpdf',upload.single('file'),(req,res)=>{
-    console.log(req.file.path)
+  
     try {
         let outputfilepath ='uploads/'+ Date.now()+"output.pdf"
         if(path.extname(req.file.path) == 'docx'){
