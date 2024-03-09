@@ -31,16 +31,24 @@ app.post('/nodedocxpdf',upload.single('file'),(req,res)=>{
     console.log(req.file.path)
     try {
         let outputfilepath ='uploads/'+ Date.now()+"output.pdf"
-        docxtopdf(req.file.path,outputfilepath,(err,result)=>{
-            if(err){
-                res.json({'filetype':'not def'})
-            }else{
-                res.download(outputfilepath)
-            }
-        })
-    } catch (error) {
+        if(path.extname(req.file.path) == 'docx'){
+            docxtopdf(req.file.path,outputfilepath,(err,result)=>{
+                if(err){
+                    res.json({'filetype':'not def'})
+                }else{
+                    res.download(outputfilepath)
+                }
+            })
+        }else{
+
+            res.json({'filetype':'not def'})
+        }
+     } catch (error) {
+            
         res.json({'filetype':'not def'})
-    }
+        }
+
+    res.json({'filetype':'not def'})
 
 
 })
